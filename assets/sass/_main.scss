@@ -23,6 +23,10 @@ main {
             }
         }
 
+        #listContainer {
+            @include box(100%,auto);
+        }
+
         #listAdd {
             @include box(100%,5%);
             @extend .flexCenter;
@@ -51,8 +55,9 @@ main {
             color:$headerColor;
             background-color: $headerBckground;
             display:flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
+            padding-left: 5%;
             padding-right: 5%;
 
             #addTaskClose {
@@ -63,6 +68,33 @@ main {
 
             #addTaskClose:hover {
                 transform: scale(125%);
+            }
+        }
+
+        #addTaskForm {
+            @extend .flexCenterColumn;
+            @include box(100%);
+
+            input {
+                margin-bottom: 3%;
+            }
+
+            #inputError {
+                color:red;
+                margin-bottom: 3%;
+            }
+
+            button {
+                @include box(15%,5%);
+                border:solid 1px $color2;
+                box-shadow: rgb(204, 219, 232) 0px 0px 6px 0px, rgba(255, 255, 255, 0.5) 0px 0px 6px 1px;
+                border-radius: 20px;
+                cursor:pointer;
+                transition:0.3s;
+            }
+
+            button:hover {
+                transform: scale(110%);
             }
         }
     }

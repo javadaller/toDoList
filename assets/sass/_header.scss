@@ -1,6 +1,7 @@
 @use "extends/_extends_dir";
 
 header {
+    position:relative;
     @include box(100%,10vh);
     @extend .flexCenter;
     color:$headerColor;
@@ -8,5 +9,22 @@ header {
 
     h1 {
         font-size: 7vw;
+        @include responsive(900px) {
+            font-size: 5vw;
+        }
+        @include responsive(1300px) {
+            font-size: 4vw;
+        }
+        @include responsive(1600px) {
+            font-size: 3vw;
+        }
+    }
+
+    img {
+        height:50%;
+        position: absolute;
+        top:50%;
+        left:5%;
+        transform: translateY(-50%);
     }
 }

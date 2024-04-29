@@ -1,0 +1,43 @@
+ul {
+    padding-inline-start: 0;
+}
+
+li {
+    height:5%;
+    display: grid;
+    grid-template-columns: 1fr 5fr repeat(2, 1fr);
+    grid-template-rows: 1fr; 
+    justify-items: center;
+    align-items: center;
+    border:solid 1px $color2;
+    margin:10px;
+    border-radius: 30px 30px;
+    box-shadow: rgb(204, 219, 232) 0px 0px 6px 0px, rgba(255, 255, 255, 0.5) 0px 0px 6px 1px;
+
+    .svgDrag {
+        height:40%;
+        justify-self: start;
+        cursor: grab;
+        padding-left: 15%;
+    }
+
+    .taskName {
+        font-size: 4vw;
+        justify-self: start;
+    }
+
+    .taskDate {
+        font-size: 3vw;
+    }
+
+    .taskCheck {
+
+    }
+
+    .svgDelete {
+        height:40%;
+        justify-self: end;
+        cursor: pointer;
+        padding-right: 15%;
+    }
+}

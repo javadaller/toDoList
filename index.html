@@ -3,16 +3,16 @@
 
     <head>
 
-        <title>To DO List</title>
+        <title>To Do List</title>
 
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-        <!-- <link rel="icon" type="svg" href="assets/images/icons/code.svg"> -->
+        <link rel="icon" type="svg" href="assets/images/icons/list.svg">
 
-        <script defer src="assets/js/fnc.js"></script>
-        <script defer src="assets/js/main.js"></script>
+        <script defer type="module" src="assets/js/fnc.js"></script>
+        <script defer type="module" src="assets/js/main.js"></script>
 
     </head>
 
@@ -20,7 +20,9 @@
 
         <header>
 
-            <h1>To Do List</h1>
+            <h1>TO DO LIST</h1>
+
+            <img id="logo" class="svg svgLight" src="assets/images/icons/list2.svg" alt="list">
 
         </header>
 
@@ -30,9 +32,13 @@
 
                 <section id="listHeader">
 
-                    <h2>To do:</h2>
+                    <h2>to do:</h2>
 
                 </section>
+
+                <ul id="listContainer">
+
+                </ul>
 
                 <section id="listAdd">
 
@@ -46,12 +52,19 @@
 
                 <section id="addTaskHeader">
 
+                    <h2>add task:</h2>
+
                     <img id="addTaskClose" class="svg svgLight" src="assets/images/icons/close.svg" alt="close">
 
                 </section>
 
                 <section id="addTaskForm">
-                    
+
+                    <label for="taskName">Task:</label>
+                    <input type="text" name="taskName" id="taskName">
+                    <div id="inputError"></div>
+
+                    <button id="confirmButton" type="submit">Add</button>
 
                 </section>
 

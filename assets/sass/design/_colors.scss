@@ -9,3 +9,12 @@ $headerBckground:$color2;
 
 $footerColor:$color1;
 $footerBckground:$color2;
+
+
+.error {
+    border:solid 1px red;
+}
+
+.noError {
+    border:solid 1px $color2;
+}

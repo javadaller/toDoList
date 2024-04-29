@@ -1,5 +1,5 @@
 // CREATE DIV
-function createDiv(type,parent,content,className) {
+export function createDiv(type,parent,content,className) {
   const newDiv=document.createElement(type);
   if (type!='') {
     newDiv.innerHTML=content;
@@ -13,14 +13,14 @@ function createDiv(type,parent,content,className) {
 
 //------------------------------------------------------------------------------------------
 // SLEEP FUNCTION
-function sleep(ms) {
+export function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 //------------------------------------------------------------------------------------------
 
 // ESCAPE HTML
-function escapeHtml(text) {
+export function escapeHTML(text) {
   var map = {
     '&': '&amp;',
     '<': '&lt;',

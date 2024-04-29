@@ -357,6 +357,14 @@ template {
     filter: blur(0);
   }
 }
+.error {
+  border: solid 1px red;
+}
+
+.noError {
+  border: solid 1px #D3CDD7;
+}
+
 .svgLight {
   filter: invert(17%) sepia(0%) saturate(120%) hue-rotate(142deg) brightness(96%) contrast(85%);
 }
@@ -385,6 +393,42 @@ body {
   font-family: "barlow";
 }
 
+ul {
+  padding-inline-start: 0;
+}
+
+li {
+  height: 5%;
+  display: grid;
+  grid-template-columns: 1fr 5fr repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  justify-items: center;
+  align-items: center;
+  border: solid 1px #D3CDD7;
+  margin: 10px;
+  border-radius: 30px 30px;
+  box-shadow: rgb(204, 219, 232) 0px 0px 6px 0px, rgba(255, 255, 255, 0.5) 0px 0px 6px 1px;
+}
+li .svgDrag {
+  height: 40%;
+  justify-self: start;
+  cursor: grab;
+  padding-left: 15%;
+}
+li .taskName {
+  font-size: 4vw;
+  justify-self: start;
+}
+li .taskDate {
+  font-size: 3vw;
+}
+li .svgDelete {
+  height: 40%;
+  justify-self: end;
+  cursor: pointer;
+  padding-right: 15%;
+}
+
 .flexCenter, main #list #listAdd, main, header {
   display: flex;
   justify-content: center;
@@ -397,7 +441,7 @@ body {
   align-items: center;
 }
 
-.flexCenterColumn {
+.flexCenterColumn, main #addTask #addTaskForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -426,6 +470,7 @@ body {
 }
 
 header {
+  position: relative;
   width: 100%;
   height: 10vh;
   color: #313131;
@@ -433,6 +478,28 @@ header {
 }
 header h1 {
   font-size: 7vw;
+}
+@media only screen and (min-width: 900px) {
+  header h1 {
+    font-size: 5vw;
+  }
+}
+@media only screen and (min-width: 1300px) {
+  header h1 {
+    font-size: 4vw;
+  }
+}
+@media only screen and (min-width: 1600px) {
+  header h1 {
+    font-size: 3vw;
+  }
+}
+header img {
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
 }
 
 .flexCenter, header, main, main #list #listAdd {
@@ -447,7 +514,7 @@ header h1 {
   align-items: center;
 }
 
-.flexCenterColumn {
+.flexCenterColumn, main #addTask #addTaskForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -498,6 +565,10 @@ main #list #listHeader {
 main #list #listHeader h2 {
   margin-left: 5%;
 }
+main #list #listContainer {
+  width: 100%;
+  height: auto;
+}
 main #list #listAdd {
   width: 100%;
   height: 5%;
@@ -525,8 +596,9 @@ main #addTask #addTaskHeader {
   color: #313131;
   background-color: #D3CDD7;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
+  padding-left: 5%;
   padding-right: 5%;
 }
 main #addTask #addTaskHeader #addTaskClose {
@@ -536,6 +608,29 @@ main #addTask #addTaskHeader #addTaskClose {
 }
 main #addTask #addTaskHeader #addTaskClose:hover {
   transform: scale(125%);
+}
+main #addTask #addTaskForm {
+  width: 100%;
+  height: 100%;
+}
+main #addTask #addTaskForm input {
+  margin-bottom: 3%;
+}
+main #addTask #addTaskForm #inputError {
+  color: red;
+  margin-bottom: 3%;
+}
+main #addTask #addTaskForm button {
+  width: 15%;
+  height: 5%;
+  border: solid 1px #D3CDD7;
+  box-shadow: rgb(204, 219, 232) 0px 0px 6px 0px, rgba(255, 255, 255, 0.5) 0px 0px 6px 1px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+main #addTask #addTaskForm button:hover {
+  transform: scale(110%);
 }
 
 .flexCenter, header, main, main #list #listAdd {
@@ -550,7 +645,7 @@ main #addTask #addTaskHeader #addTaskClose:hover {
   align-items: center;
 }
 
-.flexCenterColumn {
+.flexCenterColumn, main #addTask #addTaskForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
