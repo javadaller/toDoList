@@ -1,4 +1,4 @@
-import {sleep,createDiv,escapeHTML} from './fnc.js';
+import {sleep,createDiv,escapeHTML,createList} from './fnc.js';
 
 //init
 let addTaskOpen=false;
@@ -7,6 +7,20 @@ const addTask=document.querySelector('#addTask');
 const listContainer=document.querySelector('#listContainer');
 const taskName=document.querySelector('#taskName');
 const error=document.querySelector('#inputError');
+
+//local storage
+// let storage=localStorage.getItem('tasks');
+// if(storage!=null) {
+//     console.log('chargement taches');
+//     storage=localStorage.getItem('tasks');
+//     storage.forEach(element => {
+//         createList(element);
+//     });
+    
+// } else {
+//     storage=[];
+//     localStorage.setItem('tasks', storage);
+// }
 
 //Add button
 const addButton=document.querySelector('#listAddButton');
@@ -50,7 +64,12 @@ async function confirmTask() {
     
     const name=escapeHTML(taskName.value);
 
-    if(name.length<20) {
+    if (name=='') {
+
+        taskName.classList.add('error');
+        error.innerText='the name is empty';
+
+    } else if(name.length<20) {
 
         addTaskOpen=false;
         addTask.style.display='none';
@@ -123,25 +142,6 @@ async function confirmTask() {
             return listItems.length;
         }
 
-
-        function adjustListItemsPositions(offsetY) {
-            const listItems = listContainer.children;
-            const listItemHeight = draggingElement.offsetHeight;
-
-            for (let i = 0; i < listItems.length; i++) {
-                if (i !== initialIndex) {
-                    const offset = i > initialIndex ? listItemHeight : 0;
-                    const currentOffset = offsetY + offset;
-                    listItems[i].style.transform = `translateY(${currentOffset}px)`;
-                }
-            }
-        }
-
-        
-        
-        
-        
-
         //task name
         const taskContainerName=createDiv('p',taskContainer,name,'taskName');
 
@@ -155,6 +155,13 @@ async function confirmTask() {
         taskDelete.src="assets/images/icons/remove.svg";
         deleteTask(taskContainer,taskDelete);
 
+        //update storage
+        const newTask = { name: name, checked: false };
+        let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+        tasks.push(newTask);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
+        //reset
         taskName.value='';
         taskName.classList.remove('error');
         taskName.classList.add('noError');
@@ -187,3 +194,4 @@ function checkTask(checkbox,task) {
         }
     })
 }
+
