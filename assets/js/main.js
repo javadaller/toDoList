@@ -2,7 +2,6 @@ import {sleep,createDiv,escapeHTML} from './fnc.js';
 
 //init
 let addTaskOpen=false;
-let draggedItem = null;
 const list=document.querySelector('#list');
 const addTask=document.querySelector('#addTask');
 const listContainer=document.querySelector('#listContainer');
@@ -62,6 +61,86 @@ async function confirmTask() {
         //drag svg
         const taskDrag=createDiv('img',taskContainer,null,'svgDrag');
         taskDrag.src="assets/images/icons/draggable.svg";
+
+        let draggingElement = null;
+
+        taskDrag.addEventListener('mousedown', (event) => {
+            event.preventDefault(); // Empêcher la sélection de texte
+
+            draggingElement = taskContainer;
+
+            // Sauvegarder la position initiale de l'élément
+            const initialOffset = event.clientY - draggingElement.getBoundingClientRect().top;
+
+            // Événement mousemove : déplacer l'élément
+            document.addEventListener('mousemove', onMouseMove);
+
+            function onMouseMove(event) {
+                if (draggingElement) {
+                    // Calculer la nouvelle position de l'élément
+                    const newY = event.clientY - initialOffset*10;
+
+                    // Appliquer la translation à l'élément
+                    draggingElement.style.transform = `translateY(${newY}px)`;
+                }
+            }
+
+            // Événement mouseup : arrêter le déplacement
+            document.addEventListener('mouseup', onMouseUp);
+
+            function onMouseUp(event) {
+                if (draggingElement) {
+                    // Réinitialiser l'élément en cours de déplacement
+                    draggingElement.style.transform = 'none';
+                    draggingElement = null;
+
+                    // Trouver la nouvelle position de l'élément dans la liste
+                    const newIndex = calculateNewIndex(event.clientY);
+
+                    // Réinsérer l'élément à sa nouvelle position
+                    if (newIndex !== -1) {
+                        const referenceNode = listContainer.children[newIndex];
+                        listContainer.insertBefore(taskContainer, referenceNode);
+                    }
+
+                    // Supprimer les gestionnaires d'événements mousemove et mouseup
+                    document.removeEventListener('mousemove', onMouseMove);
+                    document.removeEventListener('mouseup', onMouseUp);
+                }
+            }
+        });
+
+        function calculateNewIndex(clientY) {
+            const listItems = [...listContainer.children];
+
+            for (let i = 0; i < listItems.length; i++) {
+                const rect = listItems[i].getBoundingClientRect();
+                if (clientY < rect.top + rect.height / 2) {
+                    return i;
+                }
+            }
+
+            return listItems.length;
+        }
+
+
+        function adjustListItemsPositions(offsetY) {
+            const listItems = listContainer.children;
+            const listItemHeight = draggingElement.offsetHeight;
+
+            for (let i = 0; i < listItems.length; i++) {
+                if (i !== initialIndex) {
+                    const offset = i > initialIndex ? listItemHeight : 0;
+                    const currentOffset = offsetY + offset;
+                    listItems[i].style.transform = `translateY(${currentOffset}px)`;
+                }
+            }
+        }
+
+        
+        
+        
+        
 
         //task name
         const taskContainerName=createDiv('p',taskContainer,name,'taskName');
