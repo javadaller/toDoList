@@ -65,7 +65,7 @@ async function confirmTask() {
     const name=escapeHTML(taskName.value);
 
     if (name=='') {
-
+        taskName.classList.remove('noError');
         taskName.classList.add('error');
         error.innerText='the name is empty';
 
@@ -170,6 +170,7 @@ async function confirmTask() {
         list.style.display='block';
 
     } else {
+        taskName.classList.remove('noError');
         taskName.classList.add('error');
         error.innerText='20 characters maximum';
     }
