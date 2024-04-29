@@ -1,0 +1,12 @@
+@use "extends/_extends_dir";
+
+header {
+    @include box(100%,10vh);
+    @extend .flexCenter;
+    color:$headerColor;
+    background-color: $headerBckground;
+
+    h1 {
+        font-size: 7vw;
+    }
+}

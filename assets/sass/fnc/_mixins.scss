@@ -1,0 +1,10 @@
+@mixin box($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+@mixin responsive($width) {
+    @media only screen and (min-width: $width) {
+        @content;
+    }
+}

@@ -1,0 +1,23 @@
+@font-face {
+	font-family: 'syncopate';
+	src:url('../fonts/Syncopate-Regular.ttf') format('truetype')
+}
+
+@font-face {
+	font-family: 'syncopateBold';
+	src:url('../fonts/Syncopate-Bold.ttf') format('truetype')
+}
+
+@font-face {
+	font-family: 'nanumPenScript';
+	src:url('../fonts/NanumPenScript-Regular.ttf') format('truetype')
+}
+
+@font-face {
+	font-family: 'barlow';
+	src:url('../fonts/Barlow-Regular.ttf') format('truetype')
+}
+
+body {
+	font-family: 'barlow';
+}

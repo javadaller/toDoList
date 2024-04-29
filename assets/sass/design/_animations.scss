@@ -1,0 +1,27 @@
+.fadeOut {
+    animation:fadeOut 0.3s linear forwards;
+}
+@keyframes fadeOut {
+    0%{
+        opacity:1;
+        filter:blur(0);
+    }
+    100%{
+        opacity:0;
+        filter:blur(10px);
+    }
+}
+
+.fadeIn {
+    animation:fadeIn 0.3s linear forwards;
+}
+@keyframes fadeIn {
+    0%{
+        opacity:0;
+        filter:blur(10px);
+    }
+    100%{
+        opacity:1;
+        filter:blur(0);
+    }
+}

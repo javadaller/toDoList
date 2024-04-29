@@ -1,0 +1,14 @@
+@use "extends/_extends_dir";
+
+footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    @include box(100%,10vh);
+    color:$footerColor;
+    background-color: $footerBckground;
+
+    p {
+        margin-right: 10%;
+    }
+}
