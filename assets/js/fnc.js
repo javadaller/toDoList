@@ -4,7 +4,6 @@ export async function createList(inputName,checked,newTask) {
   const error = document.querySelector('#inputError');
 
   const name = escapeHTML(inputName);
-
   const newIndex = listContainer.children.length;
   const taskID = generateID(name, newIndex);
 
@@ -39,7 +38,7 @@ export async function createList(inputName,checked,newTask) {
 
           function onMouseMove(event) {
               if (draggingElement) {
-                  const newY = event.clientY - initialOffset*10;
+                  const newY = event.clientY - (initialOffset*10 + draggingElement.getBoundingClientRect().top);
                   draggingElement.style.transform = `translateY(${newY}px)`;
               }
           }
@@ -199,22 +198,23 @@ function deleteTask(ID,button) {
 //------------------------------------------------------------------------------------------
 
 //CHECK TASK
-function checkTask(checkbox,task,ID) {
+function checkTask(checkbox, taskElement, ID) {
   checkbox.addEventListener('change', () => {
-    const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-    const taskToUpdate = tasks.find(task => task.id === ID);
-    taskToUpdate.checked = checkbox.checked;
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+      const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+      const taskToUpdate = tasks.find(task => task.id === ID);
+      taskToUpdate.checked = checkbox.checked;
+      localStorage.setItem('tasks', JSON.stringify(tasks));
 
-    if(checkbox.checked) {
-        task.style.textDecoration = 'line-through';
-        task.style.color = 'grey';
-    } else {
-        task.style.textDecoration = 'none';
-        task.style.color = 'inherit';
-    }
-  })
+      if (checkbox.checked) {
+          taskElement.style.textDecoration = 'line-through';
+          taskElement.style.color = 'grey';
+      } else {
+          taskElement.style.textDecoration = 'none';
+          taskElement.style.color = 'inherit';
+      }
+  });
 }
+
 
 //------------------------------------------------------------------------------------------
 
