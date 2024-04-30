@@ -20,6 +20,7 @@ export async function createList(inputName,checked,newTask) {
       //container
       const taskContainer = createDiv('li',listContainer,null,'task');
       taskContainer.id = taskID;
+      taskContainer.setAttribute("checked",false);
 
       //drag svg
       const taskDrag = createDiv('img',taskContainer,null,'svgDrag');
@@ -59,6 +60,28 @@ export async function createList(inputName,checked,newTask) {
                       listContainer.insertBefore(taskContainer, referenceNode);
                   }
 
+                  //Change local storage order
+                  const listArray=Array.from(listContainer.children);
+                  localStorage.setItem('tasks', []); 
+
+                  listArray.forEach(element => {
+                    const array=Array.from(element.children);
+                    console.log(array);
+                    const text=array[1].innerText;
+                    let check;
+
+                    if(element.getAttribute('checked') == "true" || element.getAttribute('checked') == true) {
+                      check = true;
+                    } else {
+                      check = false;
+                    }
+
+                    const newTask = {id:element.id, name: text, checked: check};
+                    let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+                    tasks.push(newTask);
+                    localStorage.setItem('tasks', JSON.stringify(tasks));                   
+                  });
+
                   //remove up and move
                   document.removeEventListener('mousemove', onMouseMove);
                   document.removeEventListener('mouseup', onMouseUp);
@@ -85,7 +108,8 @@ export async function createList(inputName,checked,newTask) {
       const taskCheck = createDiv('input',taskContainer,'taskCheck');
       taskCheck.type = 'checkbox';
       if(checked != null) {
-        taskCheck.checked = checked;
+        taskContainer.setAttribute("checked",checked);
+        taskCheck.checked=checked;
         if(checked) {
           taskContainerName.style.textDecoration = 'line-through';
           taskContainerName.style.color = 'grey';
@@ -122,6 +146,8 @@ export async function createList(inputName,checked,newTask) {
       error.innerText = '20 characters maximum';
   }
 } //end createList
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
