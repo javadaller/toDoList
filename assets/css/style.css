@@ -416,7 +416,7 @@ li .svgDrag {
   padding-left: 15%;
 }
 li .taskName {
-  font-size: 4vw;
+  font-size: 1.1em;
   justify-self: start;
 }
 li .taskDate {
@@ -427,6 +427,10 @@ li .svgDelete {
   justify-self: end;
   cursor: pointer;
   padding-right: 15%;
+  transition: 0.3s;
+}
+li .svgDelete:hover {
+  transform: scale(120%);
 }
 
 .flexCenter, main #list #listAdd, main, header {
@@ -547,7 +551,7 @@ main {
   height: 80vh;
 }
 main #list {
-  width: 85%;
+  width: 400px;
   height: 65vh;
   border-radius: 20px 20px;
   overflow: hidden;

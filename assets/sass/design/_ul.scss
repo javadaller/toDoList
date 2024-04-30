@@ -22,7 +22,7 @@ li {
     }
 
     .taskName {
-        font-size: 4vw;
+        font-size: 1.1em;
         justify-self: start;
     }
 
@@ -30,14 +30,24 @@ li {
         font-size: 3vw;
     }
 
-    .taskCheck {
+    // .taskCheck {
+    //     cursor: pointer;
+    //     transition:0.3s;
+    // }
 
-    }
+    // .taskCheck:hover {
+    //     transform: scale(110%);
+    // }
 
     .svgDelete {
         height:40%;
         justify-self: end;
         cursor: pointer;
         padding-right: 15%;
+        transition:0.3s;
+    }
+
+    .svgDelete:hover {
+        transform:scale(120%);
     }
 }
